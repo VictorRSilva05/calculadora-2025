@@ -1,4 +1,5 @@
-﻿using System.Threading.Channels;
+﻿using System.Runtime.CompilerServices;
+using System.Threading.Channels;
 
 namespace Calculadora.ConsoleApp
 {
@@ -6,8 +7,11 @@ namespace Calculadora.ConsoleApp
     {
         static void Main(string[] args)
         {
+            int sessao = -1;
+            string[] operacoes = new string[100];
             while (true)
             {
+                sessao++;
                 Console.Clear();
 
                 Console.WriteLine("--------------------------------------");
@@ -19,6 +23,7 @@ namespace Calculadora.ConsoleApp
                 Console.WriteLine("3 - Multiplicação");
                 Console.WriteLine("4 - Divisão");
                 Console.WriteLine("5 - Tabuada");
+                Console.WriteLine("6 - Histórico das operações");
                 Console.WriteLine("S - Sair");
 
                 Console.Write("Escolha uma opção: ");
@@ -42,8 +47,19 @@ namespace Calculadora.ConsoleApp
                         int resultadoTabuada = numeroTabuada * contador;
 
                         Console.WriteLine($"{numeroTabuada} x {contador}  = {resultadoTabuada}");
+                        operacoes[sessao] = $"Tabuada do: {numeroTabuada}";
                     }
 
+                    Console.ReadKey();
+                    continue;
+                }
+                else if (opcao == "6")
+                {
+                    foreach(var item in operacoes)
+                    {
+                        if(item is not null)
+                            Console.WriteLine(item);
+                    }
                     Console.ReadKey();
                     continue;
                 }
@@ -61,14 +77,17 @@ namespace Calculadora.ConsoleApp
                 if (opcao == "1")
                 {
                     resultado = primeiroNumero + segundoNumero;
+                    operacoes[sessao] = $"{primeiroNumero} + {segundoNumero} = {resultado}";
                 }
                 else if (opcao == "2")
                 {
                     resultado = primeiroNumero - segundoNumero;
+                    operacoes[sessao] = $"{primeiroNumero} - {segundoNumero} = {resultado}";
                 }
                 else if (opcao == "3")
                 {
                     resultado = primeiroNumero * segundoNumero;
+                    operacoes[sessao] = $"{primeiroNumero} * {segundoNumero} = {resultado}";
                 }
                 else if (opcao == "4")
                 {
@@ -89,6 +108,7 @@ namespace Calculadora.ConsoleApp
                         continue;
                     }
                     resultado = primeiroNumero / segundoNumero;
+                    operacoes[sessao] = $"{primeiroNumero} / {segundoNumero} = {resultado}";
                 }
                 Console.WriteLine("--------------------------------------");
                 Console.WriteLine("Resultado: " + resultado.ToString("F2"));
