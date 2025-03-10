@@ -1,4 +1,6 @@
-﻿namespace Calculadora.ConsoleApp
+﻿using System.Threading.Channels;
+
+namespace Calculadora.ConsoleApp
 {
     internal class Program
     {
@@ -16,6 +18,7 @@
                 Console.WriteLine("2 - Subtrair");
                 Console.WriteLine("3 - Multiplicação");
                 Console.WriteLine("4 - Divisão");
+                Console.WriteLine("5 - Tabuada");
                 Console.WriteLine("S - Sair");
 
                 Console.Write("Escolha uma opção: ");
@@ -24,6 +27,25 @@
                 if (opcao.ToUpper() == "S")
                 {
                     break;
+                }
+                else if (opcao == "5")
+                {
+                    Console.WriteLine("--------------------------------------");
+                    Console.WriteLine("Tabuada");
+                    Console.WriteLine("--------------------------------------");
+
+                    Console.Write("Digite o número: ");
+                    int numeroTabuada = Convert.ToInt32(Console.ReadLine());
+
+                    for (int contador = 1; contador <= 10; contador++)
+                    {
+                        int resultadoTabuada = numeroTabuada * contador;
+
+                        Console.WriteLine($"{numeroTabuada} x {contador}  = {resultadoTabuada}");
+                    }
+
+                    Console.ReadKey();
+                    continue;
                 }
 
                 Console.Write("Digite o primeiro número: ");
@@ -60,7 +82,7 @@
                     //    Console.ReadKey();
                     //    continue;
                     //}
-                    if(segundoNumero == 0)
+                    if (segundoNumero == 0)
                     {
                         Console.WriteLine("Não é possível dividir um número por zero.");
                         Console.ReadKey();
@@ -68,14 +90,14 @@
                     }
                     resultado = primeiroNumero / segundoNumero;
                 }
-                    Console.WriteLine("--------------------------------------");
+                Console.WriteLine("--------------------------------------");
                 Console.WriteLine("Resultado: " + resultado.ToString("F2"));
                 Console.WriteLine("--------------------------------------");
 
                 Console.WriteLine("Deseja continuar (S/N)");
                 string opcaoContinuar = Console.ReadLine().ToUpper();
 
-                if(opcaoContinuar != "S")
+                if (opcaoContinuar != "S")
                 {
                     break;
                 }
