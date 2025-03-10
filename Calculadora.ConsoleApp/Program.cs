@@ -50,7 +50,23 @@
                 }
                 else if (opcao == "4")
                 {
-                    resultado = primeiroNumero / segundoNumero; 
+                    //if (segundoNumero != 0)
+                    //{
+                    //    resultado = primeiroNumero / segundoNumero;
+                    //}
+                    //else
+                    //{
+                    //    Console.WriteLine("Não é possível dividir um número por zero.");
+                    //    Console.ReadKey();
+                    //    continue;
+                    //}
+                    if(segundoNumero == 0)
+                    {
+                        Console.WriteLine("Não é possível dividir um número por zero.");
+                        Console.ReadKey();
+                        continue;
+                    }
+                    resultado = primeiroNumero / segundoNumero;
                 }
                     Console.WriteLine("--------------------------------------");
                 Console.WriteLine("Resultado: " + resultado.ToString("F2"));
