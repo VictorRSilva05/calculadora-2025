@@ -12,24 +12,10 @@ namespace Calculadora.ConsoleApp
             while (true)
             {
                 sessao++;
-                Console.Clear();
 
-                Console.WriteLine("--------------------------------------");
-                Console.WriteLine("Calculadora Tabajara 2025");
-                Console.WriteLine("--------------------------------------");
+                string opcao = ExibirMenu(); 
 
-                Console.WriteLine("1 - Somar");
-                Console.WriteLine("2 - Subtrair");
-                Console.WriteLine("3 - Multiplicação");
-                Console.WriteLine("4 - Divisão");
-                Console.WriteLine("5 - Tabuada");
-                Console.WriteLine("6 - Histórico das operações");
-                Console.WriteLine("S - Sair");
-
-                Console.Write("Escolha uma opção: ");
-                string opcao = Console.ReadLine();
-
-                if (opcao.ToUpper() == "S")
+                if (opcao == "S")
                 {
                     break;
                 }
@@ -122,6 +108,28 @@ namespace Calculadora.ConsoleApp
                     break;
                 }
             }
+        }
+
+        static string ExibirMenu()
+        {
+            Console.Clear();
+
+            Console.WriteLine("--------------------------------------");
+            Console.WriteLine("Calculadora Tabajara 2025");
+            Console.WriteLine("--------------------------------------");
+
+            Console.WriteLine("1 - Somar");
+            Console.WriteLine("2 - Subtrair");
+            Console.WriteLine("3 - Multiplicação");
+            Console.WriteLine("4 - Divisão");
+            Console.WriteLine("5 - Tabuada");
+            Console.WriteLine("6 - Histórico das operações");
+            Console.WriteLine("S - Sair");
+
+            Console.Write("Escolha uma opção: ");
+            string opcao = Console.ReadLine().ToUpper();
+
+            return opcao;
         }
     }
 }
