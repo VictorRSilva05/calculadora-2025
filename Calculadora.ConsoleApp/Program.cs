@@ -5,107 +5,27 @@ namespace Calculadora.ConsoleApp
 {
     internal class Program
     {
+        static int sessao = default;
+        static string[] operacoes = new string[100];
         static void Main(string[] args)
         {
-            int sessao = -1;
-            string[] operacoes = new string[100];
             while (true)
             {
-                sessao++;
+                string opcao = ExibirMenu();
 
-                string opcao = ExibirMenu(); 
-
-                if (opcao == "S")
-                {
+                if (OpcaoSairEscolhida(opcao) is true)
                     break;
-                }
-                else if (opcao == "5")
+
+                else if (OpcaoTabuadaEscolhida(opcao))
+                    ExibirTabuada();
+
+                else if (OpcaoHistoricoEscolhida(opcao))
+                    ExibirHistorico();
+
+                else
                 {
-                    Console.WriteLine("--------------------------------------");
-                    Console.WriteLine("Tabuada");
-                    Console.WriteLine("--------------------------------------");
-
-                    Console.Write("Digite o número: ");
-                    int numeroTabuada = Convert.ToInt32(Console.ReadLine());
-
-                    for (int contador = 1; contador <= 10; contador++)
-                    {
-                        int resultadoTabuada = numeroTabuada * contador;
-
-                        Console.WriteLine($"{numeroTabuada} x {contador}  = {resultadoTabuada}");
-                        operacoes[sessao] = $"Tabuada do: {numeroTabuada}";
-                    }
-
+                    ExibirResultado(RealizarCalculo(opcao));
                     Console.ReadKey();
-                    continue;
-                }
-                else if (opcao == "6")
-                {
-                    foreach(var item in operacoes)
-                    {
-                        if(item is not null)
-                            Console.WriteLine(item);
-                    }
-                    Console.ReadKey();
-                    continue;
-                }
-
-                Console.Write("Digite o primeiro número: ");
-                string primerioNumeroString = Console.ReadLine();
-                decimal primeiroNumero = Convert.ToDecimal(primerioNumeroString);
-
-                Console.Write("Digite o segundo número: ");
-                string segundoNumeroString = Console.ReadLine();
-                decimal segundoNumero = Convert.ToDecimal(segundoNumeroString);
-
-                decimal resultado = default;
-
-                if (opcao == "1")
-                {
-                    resultado = primeiroNumero + segundoNumero;
-                    operacoes[sessao] = $"{primeiroNumero} + {segundoNumero} = {resultado}";
-                }
-                else if (opcao == "2")
-                {
-                    resultado = primeiroNumero - segundoNumero;
-                    operacoes[sessao] = $"{primeiroNumero} - {segundoNumero} = {resultado}";
-                }
-                else if (opcao == "3")
-                {
-                    resultado = primeiroNumero * segundoNumero;
-                    operacoes[sessao] = $"{primeiroNumero} * {segundoNumero} = {resultado}";
-                }
-                else if (opcao == "4")
-                {
-                    //if (segundoNumero != 0)
-                    //{
-                    //    resultado = primeiroNumero / segundoNumero;
-                    //}
-                    //else
-                    //{
-                    //    Console.WriteLine("Não é possível dividir um número por zero.");
-                    //    Console.ReadKey();
-                    //    continue;
-                    //}
-                    if (segundoNumero == 0)
-                    {
-                        Console.WriteLine("Não é possível dividir um número por zero.");
-                        Console.ReadKey();
-                        continue;
-                    }
-                    resultado = primeiroNumero / segundoNumero;
-                    operacoes[sessao] = $"{primeiroNumero} / {segundoNumero} = {resultado}";
-                }
-                Console.WriteLine("--------------------------------------");
-                Console.WriteLine("Resultado: " + resultado.ToString("F2"));
-                Console.WriteLine("--------------------------------------");
-
-                Console.WriteLine("Deseja continuar (S/N)");
-                string opcaoContinuar = Console.ReadLine().ToUpper();
-
-                if (opcaoContinuar != "S")
-                {
-                    break;
                 }
             }
         }
@@ -130,6 +50,101 @@ namespace Calculadora.ConsoleApp
             string opcao = Console.ReadLine().ToUpper();
 
             return opcao;
+        }
+
+        static bool OpcaoSairEscolhida(string opcao)
+        {
+            bool opcaoSairEscolhida = opcao == "S";
+            return opcaoSairEscolhida;
+        }
+
+        static bool OpcaoTabuadaEscolhida(string opcao)
+        {
+            bool opcaoTabuadaEscolhida = opcao == "5";
+            return opcaoTabuadaEscolhida;
+        }
+
+        static void ExibirTabuada()
+        {
+            Console.WriteLine("--------------------------------------");
+            Console.WriteLine("Tabuada");
+            Console.WriteLine("--------------------------------------");
+
+            Console.Write("Digite o número: ");
+            int numeroTabuada = Convert.ToInt32(Console.ReadLine());
+
+            for (int contador = 1; contador <= 10; contador++)
+            {
+                int resultadoTabuada = numeroTabuada * contador;
+
+                Console.WriteLine($"{numeroTabuada} x {contador}  = {resultadoTabuada}");
+            }
+
+            Console.ReadKey();
+        }
+
+        static bool OpcaoHistoricoEscolhida(string opcao)
+        {
+            bool opcaoHistoricoEscolhida = opcao == "6";
+            return opcaoHistoricoEscolhida;
+        }
+
+        static void ExibirHistorico()
+        {
+            foreach (var item in operacoes)
+            {
+                if (item is not null)
+                    Console.WriteLine(item);
+            }
+            Console.ReadKey();
+        }
+
+        static decimal RealizarCalculo(string operacao)
+        {
+            Console.Write("Digite o primeiro número: ");
+            decimal primeiroNumero = Convert.ToDecimal(Console.ReadLine());
+
+            Console.Write("Digite o segundo número: ");
+            decimal segundoNumero = Convert.ToDecimal(Console.ReadLine());
+
+            decimal resultado = default;
+
+            if (operacao == "1")
+            {
+                resultado = primeiroNumero + segundoNumero;
+                operacoes[sessao] = $"{primeiroNumero} + {segundoNumero} = {resultado}";
+            }
+            else if (operacao == "2")
+            {
+                resultado = primeiroNumero - segundoNumero;
+                operacoes[sessao] = $"{primeiroNumero} - {segundoNumero} = {resultado}";
+            }
+            else if (operacao == "3")
+            {
+                resultado = primeiroNumero * segundoNumero;
+                operacoes[sessao] = $"{primeiroNumero} * {segundoNumero} = {resultado}";
+            }
+            else if (operacao == "4")
+            {
+                if (segundoNumero == 0)
+                {
+                    Console.WriteLine("Não é possível dividir um número por zero.");
+                    Console.ReadKey();
+                }
+                resultado = primeiroNumero / segundoNumero;
+                operacoes[sessao] = $"{primeiroNumero} / {segundoNumero} = {resultado}";
+            }
+
+            sessao++;
+
+            return resultado;
+        }
+
+        static void ExibirResultado(decimal resultado)
+        {
+            Console.WriteLine("--------------------------------------");
+            Console.WriteLine("Resultado: " + resultado.ToString("F2"));
+            Console.WriteLine("--------------------------------------");
         }
     }
 }
