@@ -111,17 +111,17 @@ namespace Calculadora.ConsoleApp
 
             if (operacao == "1")
             {
-                resultado = primeiroNumero + segundoNumero;
+                resultado = Calculadora.Somar(primeiroNumero, segundoNumero);
                 operacoes[sessao] = $"{primeiroNumero} + {segundoNumero} = {resultado}";
             }
             else if (operacao == "2")
             {
-                resultado = primeiroNumero - segundoNumero;
+                resultado = Calculadora.Subtrair(primeiroNumero, segundoNumero);
                 operacoes[sessao] = $"{primeiroNumero} - {segundoNumero} = {resultado}";
             }
             else if (operacao == "3")
             {
-                resultado = primeiroNumero * segundoNumero;
+                resultado = Calculadora.Multiplicar(primeiroNumero, segundoNumero);
                 operacoes[sessao] = $"{primeiroNumero} * {segundoNumero} = {resultado}";
             }
             else if (operacao == "4")
@@ -131,7 +131,7 @@ namespace Calculadora.ConsoleApp
                     Console.WriteLine("Não é possível dividir um número por zero.");
                     Console.ReadKey();
                 }
-                resultado = primeiroNumero / segundoNumero;
+                resultado = Calculadora.Dividir(primeiroNumero,segundoNumero);
                 operacoes[sessao] = $"{primeiroNumero} / {segundoNumero} = {resultado}";
             }
 
