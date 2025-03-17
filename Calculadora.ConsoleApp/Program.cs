@@ -5,8 +5,6 @@ namespace Calculadora.ConsoleApp
 {
     internal class Program
     {
-        static int sessao = default;
-        static string[] operacoes = new string[100];
         static void Main(string[] args)
         {
             while (true)
@@ -91,6 +89,8 @@ namespace Calculadora.ConsoleApp
 
         static void ExibirHistorico()
         {
+            string[] operacoes = Calculadora.ObterHistoricoDeOperacoes();
+
             foreach (var item in operacoes)
             {
                 if (item is not null)
@@ -112,17 +112,14 @@ namespace Calculadora.ConsoleApp
             if (operacao == "1")
             {
                 resultado = Calculadora.Somar(primeiroNumero, segundoNumero);
-                operacoes[sessao] = $"{primeiroNumero} + {segundoNumero} = {resultado}";
             }
             else if (operacao == "2")
             {
                 resultado = Calculadora.Subtrair(primeiroNumero, segundoNumero);
-                operacoes[sessao] = $"{primeiroNumero} - {segundoNumero} = {resultado}";
             }
             else if (operacao == "3")
             {
                 resultado = Calculadora.Multiplicar(primeiroNumero, segundoNumero);
-                operacoes[sessao] = $"{primeiroNumero} * {segundoNumero} = {resultado}";
             }
             else if (operacao == "4")
             {
@@ -132,12 +129,8 @@ namespace Calculadora.ConsoleApp
                     Console.ReadKey();
                 }
                 resultado = Calculadora.Dividir(primeiroNumero,segundoNumero);
-                operacoes[sessao] = $"{primeiroNumero} / {segundoNumero} = {resultado}";
             }
-
-            sessao++;
-
-            return resultado;
+          return resultado;
         }
 
         static void ExibirResultado(decimal resultado)
