@@ -71,13 +71,14 @@ namespace Calculadora.ConsoleApp
             Console.Write("Digite o número: ");
             int numeroTabuada = Convert.ToInt32(Console.ReadLine());
 
-            for (int contador = 1; contador <= 10; contador++)
+            string[] linhasTabuada = Calculadora.GerarTabuada(numeroTabuada);
+
+            for (int contador = 0; contador < linhasTabuada.Length; contador++)
             {
                 int resultadoTabuada = numeroTabuada * contador;
 
-                Console.WriteLine($"{numeroTabuada} x {contador}  = {resultadoTabuada}");
+                Console.WriteLine(linhasTabuada[contador]);
             }
-
             Console.ReadKey();
         }
 
@@ -128,9 +129,9 @@ namespace Calculadora.ConsoleApp
                     Console.WriteLine("Não é possível dividir um número por zero.");
                     Console.ReadKey();
                 }
-                resultado = Calculadora.Dividir(primeiroNumero,segundoNumero);
+                resultado = Calculadora.Dividir(primeiroNumero, segundoNumero);
             }
-          return resultado;
+            return resultado;
         }
 
         static void ExibirResultado(decimal resultado)
